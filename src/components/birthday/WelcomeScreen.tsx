@@ -17,7 +17,7 @@ const WelcomeScreen = ({ onNext }: Props) => {
       setShowError(true);
       return;
     }
-    if (name.trim().toLowerCase() !== "jay") {
+    if (name.trim().toLowerCase() !== "trizon") {
       setError("You are not my brother! Get out! 😤");
       setShowError(true);
       return;
@@ -27,7 +27,7 @@ const WelcomeScreen = ({ onNext }: Props) => {
   };
 
   return (
-    <div className="screen-container gradient-celebration">
+    <div className="screen-container">
       <motion.div
         className="wizard-card text-center"
         initial={{ scale: 0.8, opacity: 0 }}
@@ -88,7 +88,7 @@ const WelcomeScreen = ({ onNext }: Props) => {
             }}
             onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
             placeholder="Enter your name to continue..."
-            className="w-full px-5 py-4 rounded-2xl bg-muted border-2 border-transparent focus:border-primary focus:outline-none text-center text-lg font-medium transition-all"
+            className="glass-input text-center text-lg font-medium"
           />
 
           <AnimatePresence>
@@ -106,7 +106,7 @@ const WelcomeScreen = ({ onNext }: Props) => {
 
           <motion.button
             onClick={handleSubmit}
-            className="w-full py-4 rounded-2xl gradient-warm text-primary-foreground font-bold text-lg shadow-lg hover:shadow-xl transition-all"
+            className="glass-button"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >

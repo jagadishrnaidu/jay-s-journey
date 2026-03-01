@@ -40,9 +40,9 @@ const PolaroidSelection = ({ comments, onNext }: Props) => {
   };
 
   return (
-    <div className="screen-container bg-joy-light">
+    <div className="screen-container">
       <motion.div
-        className="w-full max-w-lg mx-auto"
+        className="w-full max-w-lg mx-auto relative z-10"
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
       >
@@ -59,10 +59,10 @@ const PolaroidSelection = ({ comments, onNext }: Props) => {
             <motion.button
               key={i}
               onClick={() => toggleSelect(i)}
-              className={`relative bg-card rounded-lg p-2 pb-8 shadow-lg transition-all ${
+              className={`relative glass-panel p-2 pb-8 transition-all ${
                 selected.includes(i)
-                  ? "ring-4 ring-primary scale-[0.97]"
-                  : "hover:shadow-xl"
+                  ? "ring-2 ring-primary scale-[0.97]"
+                  : ""
               }`}
               whileTap={{ scale: 0.95 }}
               style={{ transform: `rotate(${(i % 3 - 1) * 2}deg)` }}
@@ -75,7 +75,7 @@ const PolaroidSelection = ({ comments, onNext }: Props) => {
               <img
                 src={src}
                 alt={`Polaroid ${i + 1}`}
-                className="w-full h-28 object-cover rounded"
+                className="w-full h-28 object-cover rounded-lg"
                 loading="lazy"
               />
               <p className="text-xs font-medium text-muted-foreground mt-2 px-1 truncate italic">
@@ -93,7 +93,7 @@ const PolaroidSelection = ({ comments, onNext }: Props) => {
 
         <motion.button
           onClick={handleSubmit}
-          className="w-full py-3 rounded-xl gradient-warm text-primary-foreground font-bold text-lg mt-4"
+          className="glass-button mt-4"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >

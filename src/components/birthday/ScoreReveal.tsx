@@ -8,7 +8,7 @@ interface Props {
 
 const ScoreReveal = ({ score, onNext }: Props) => {
   return (
-    <div className="screen-container gradient-celebration">
+    <div className="screen-container">
       <motion.div
         className="wizard-card text-center"
         initial={{ rotateY: 90, opacity: 0 }}
@@ -23,7 +23,7 @@ const ScoreReveal = ({ score, onNext }: Props) => {
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.3 }}
         >
-          Your Score: {score} hits! 💪
+          You guessed {score} words! 🦘
         </motion.h2>
 
         <motion.div
@@ -38,7 +38,7 @@ const ScoreReveal = ({ score, onNext }: Props) => {
           <p className="text-muted-foreground text-lg">
             Because I am the decider! Golu always wins! 👑
           </p>
-          <div className="bg-muted rounded-2xl p-4 mt-4">
+          <div className="glass-panel mt-4">
             <p className="text-sm text-muted-foreground">However, your effort score is:</p>
             <p className="text-4xl font-bold text-secondary">{score}</p>
             <p className="text-xs text-muted-foreground">
@@ -49,7 +49,7 @@ const ScoreReveal = ({ score, onNext }: Props) => {
 
         <motion.button
           onClick={onNext}
-          className="w-full py-3 rounded-xl gradient-warm text-primary-foreground font-bold text-lg flex items-center justify-center gap-2"
+          className="glass-button"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           initial={{ y: 20, opacity: 0 }}

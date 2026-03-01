@@ -19,7 +19,7 @@ const ThailandStory = ({ onNext }: Props) => {
   };
 
   return (
-    <div className="screen-container bg-love-light">
+    <div className="screen-container">
       <motion.div
         className="wizard-card text-center"
         initial={{ scale: 0.8, opacity: 0 }}
@@ -50,7 +50,7 @@ const ThailandStory = ({ onNext }: Props) => {
             setError("");
           }}
           placeholder="Start typing your confession..."
-          className="w-full px-4 py-3 rounded-xl bg-muted border-2 border-transparent focus:border-love focus:outline-none min-h-[160px] resize-none transition-all text-left"
+          className="glass-input min-h-[160px] resize-none text-left"
         />
 
         {error && (
@@ -59,7 +59,7 @@ const ThailandStory = ({ onNext }: Props) => {
 
         <motion.button
           onClick={handleSubmit}
-          className="w-full py-3 rounded-xl bg-love text-accent-foreground font-bold text-lg flex items-center justify-center gap-2 mt-4"
+          className="glass-button mt-4"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >

@@ -31,7 +31,7 @@ const SalaryPromise = () => {
   }, []);
 
   return (
-    <div className="screen-container gradient-celebration">
+    <div className="screen-container">
       <motion.div
         className="wizard-card text-center"
         initial={{ y: 100, opacity: 0 }}
@@ -56,7 +56,7 @@ const SalaryPromise = () => {
         </motion.h2>
 
         <motion.div
-          className="bg-muted rounded-2xl p-6 space-y-4 text-left"
+          className="glass-panel space-y-4 text-left"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.6 }}

@@ -26,9 +26,9 @@ const ImageCommentary = ({ onNext }: Props) => {
   const completedCount = comments.filter((c) => c.trim()).length;
 
   return (
-    <div className="screen-container bg-celebration-light">
+    <div className="screen-container">
       <motion.div
-        className="w-full max-w-lg mx-auto"
+        className="w-full max-w-lg mx-auto relative z-10"
         initial={{ y: 50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
       >
@@ -44,7 +44,7 @@ const ImageCommentary = ({ onNext }: Props) => {
           {PLACEHOLDER_IMAGES.map((src, i) => (
             <motion.div
               key={i}
-              className="bg-card rounded-2xl overflow-hidden shadow-lg border border-primary/10"
+              className="glass-panel overflow-hidden"
               initial={{ x: i % 2 === 0 ? -30 : 30, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: i * 0.05 }}
@@ -52,7 +52,7 @@ const ImageCommentary = ({ onNext }: Props) => {
               <img
                 src={src}
                 alt={`Memory ${i + 1}`}
-                className="w-full h-40 object-cover"
+                className="w-full h-40 object-cover rounded-xl"
                 loading="lazy"
               />
               <div className="p-3">
@@ -66,7 +66,7 @@ const ImageCommentary = ({ onNext }: Props) => {
                     setError("");
                   }}
                   placeholder={`Comment on memory #${i + 1}...`}
-                  className="w-full px-3 py-2 rounded-xl bg-muted border-2 border-transparent focus:border-primary focus:outline-none text-sm transition-all"
+                  className="glass-input text-sm"
                 />
               </div>
             </motion.div>
@@ -81,7 +81,7 @@ const ImageCommentary = ({ onNext }: Props) => {
 
         <motion.button
           onClick={handleSubmit}
-          className="w-full py-3 rounded-xl gradient-warm text-primary-foreground font-bold text-lg flex items-center justify-center gap-2 mt-4"
+          className="glass-button mt-4"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >

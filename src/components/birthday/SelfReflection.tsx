@@ -28,7 +28,7 @@ const SelfReflection = ({ onNext }: Props) => {
   const charCount = goals[currentQ].length;
 
   return (
-    <div className="screen-container bg-fun-light">
+    <div className="screen-container">
       <motion.div
         className="wizard-card"
         initial={{ x: -100, opacity: 0 }}
@@ -44,7 +44,7 @@ const SelfReflection = ({ onNext }: Props) => {
             <div
               key={i}
               className={`h-2 flex-1 rounded-full transition-all ${
-                i <= currentQ ? "bg-fun" : "bg-muted"
+                i <= currentQ ? "bg-fun" : "bg-muted/30"
               }`}
             />
           ))}
@@ -56,7 +56,7 @@ const SelfReflection = ({ onNext }: Props) => {
           animate={{ x: 0, opacity: 1 }}
           className="space-y-4"
         >
-          <p className="text-sm font-semibold text-fun">
+          <p className="glass-badge text-fun inline-block">
             Question {currentQ + 1} of 5
           </p>
           <p className="text-lg font-medium">{goalQuestions[currentQ]}</p>
@@ -71,7 +71,7 @@ const SelfReflection = ({ onNext }: Props) => {
                 setError("");
               }}
               placeholder="Share your thoughts (min 50 characters)..."
-              className="w-full px-4 py-3 rounded-xl bg-muted border-2 border-transparent focus:border-fun focus:outline-none min-h-[120px] resize-none transition-all"
+              className="glass-input min-h-[120px] resize-none"
             />
             <span
               className={`absolute bottom-3 right-3 text-xs font-semibold ${
@@ -88,7 +88,7 @@ const SelfReflection = ({ onNext }: Props) => {
 
           <motion.button
             onClick={handleNext}
-            className="w-full py-3 rounded-xl bg-fun text-accent-foreground font-bold text-lg flex items-center justify-center gap-2"
+            className="glass-button"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
