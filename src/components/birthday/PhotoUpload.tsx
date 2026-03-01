@@ -20,7 +20,7 @@ const PhotoUpload = ({ onNext }: Props) => {
   };
 
   return (
-    <div className="screen-container gradient-celebration">
+    <div className="screen-container">
       <motion.div
         className="wizard-card text-center"
         initial={{ y: 50, opacity: 0 }}
@@ -55,7 +55,7 @@ const PhotoUpload = ({ onNext }: Props) => {
         ) : (
           <motion.button
             onClick={() => fileRef.current?.click()}
-            className="w-full py-12 rounded-2xl border-2 border-dashed border-primary/40 bg-muted/50 flex flex-col items-center gap-3 mb-6 hover:bg-muted transition-all"
+            className="w-full py-12 rounded-2xl border-2 border-dashed border-primary/30 glass-panel flex flex-col items-center gap-3 mb-6 hover:border-primary/50 transition-all"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
@@ -77,7 +77,7 @@ const PhotoUpload = ({ onNext }: Props) => {
 
         <motion.button
           onClick={() => onNext(preview)}
-          className="w-full py-3 rounded-xl gradient-warm text-primary-foreground font-bold text-lg flex items-center justify-center gap-2"
+          className="glass-button"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >

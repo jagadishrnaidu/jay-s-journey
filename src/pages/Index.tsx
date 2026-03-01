@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { BirthdayData, initialData, submitToGoogleSheets } from "@/lib/birthdayData";
 import WelcomeScreen from "@/components/birthday/WelcomeScreen";
 import NostalgiaQuiz from "@/components/birthday/NostalgiaQuiz";
-import PillowFight from "@/components/birthday/PillowFight";
+import Hangaroo from "@/components/birthday/Hangaroo";
 import ScoreReveal from "@/components/birthday/ScoreReveal";
 import SelfReflection from "@/components/birthday/SelfReflection";
 import ThailandStory from "@/components/birthday/ThailandStory";
@@ -12,6 +12,7 @@ import PhotoUpload from "@/components/birthday/PhotoUpload";
 import ImageCommentary from "@/components/birthday/ImageCommentary";
 import PolaroidSelection from "@/components/birthday/PolaroidSelection";
 import AmazonDelivery from "@/components/birthday/AmazonDelivery";
+import JigsawPuzzle from "@/components/birthday/JigsawPuzzle";
 import F1Racer from "@/components/birthday/F1Racer";
 import BirthdayWish from "@/components/birthday/BirthdayWish";
 import SalaryPromise from "@/components/birthday/SalaryPromise";
@@ -40,14 +41,14 @@ const Index = () => {
       />
     ),
     2: (
-      <PillowFight
+      <Hangaroo
         onNext={(score) => {
-          setData((d) => ({ ...d, pillowScore: score }));
+          setData((d) => ({ ...d, hangarooScore: score }));
           next();
         }}
       />
     ),
-    3: <ScoreReveal score={data.pillowScore} onNext={next} />,
+    3: <ScoreReveal score={data.hangarooScore} onNext={next} />,
     4: (
       <SelfReflection
         onNext={(goals) => {
@@ -99,6 +100,14 @@ const Index = () => {
     ),
     10: <AmazonDelivery onNext={next} />,
     11: (
+      <JigsawPuzzle
+        onNext={() => {
+          setData((d) => ({ ...d, jigsawCompleted: true }));
+          next();
+        }}
+      />
+    ),
+    12: (
       <F1Racer
         onNext={(score) => {
           setData((d) => ({ ...d, f1Score: score }));
@@ -106,12 +115,12 @@ const Index = () => {
         }}
       />
     ),
-    12: <BirthdayWish onNext={next} />,
-    13: <SalaryPromise />,
+    13: <BirthdayWish onNext={next} />,
+    14: <SalaryPromise />,
   };
 
   // Submit data on final step
-  if (step === 13) {
+  if (step === 14) {
     submitToGoogleSheets(data);
   }
 

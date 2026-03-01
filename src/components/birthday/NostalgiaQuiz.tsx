@@ -26,7 +26,7 @@ const NostalgiaQuiz = ({ onNext }: Props) => {
   };
 
   return (
-    <div className="screen-container bg-joy-light">
+    <div className="screen-container">
       <motion.div
         className="wizard-card"
         initial={{ x: 100, opacity: 0 }}
@@ -43,7 +43,7 @@ const NostalgiaQuiz = ({ onNext }: Props) => {
             <div
               key={i}
               className={`h-2 flex-1 rounded-full transition-all ${
-                i <= currentQ ? "bg-secondary" : "bg-muted"
+                i <= currentQ ? "bg-secondary" : "bg-muted/30"
               }`}
             />
           ))}
@@ -55,7 +55,7 @@ const NostalgiaQuiz = ({ onNext }: Props) => {
           animate={{ x: 0, opacity: 1 }}
           className="space-y-4"
         >
-          <p className="text-sm font-semibold text-secondary">
+          <p className="glass-badge text-secondary inline-block">
             Question {currentQ + 1} of 5
           </p>
           <p className="text-lg font-medium">{quizQuestions[currentQ]}</p>
@@ -69,7 +69,7 @@ const NostalgiaQuiz = ({ onNext }: Props) => {
               setError("");
             }}
             placeholder="Type your answer..."
-            className="w-full px-4 py-3 rounded-xl bg-muted border-2 border-transparent focus:border-secondary focus:outline-none min-h-[100px] resize-none transition-all"
+            className="glass-input min-h-[100px] resize-none"
           />
 
           {error && (
@@ -78,7 +78,7 @@ const NostalgiaQuiz = ({ onNext }: Props) => {
 
           <motion.button
             onClick={handleAnswer}
-            className="w-full py-3 rounded-xl bg-secondary text-secondary-foreground font-bold text-lg flex items-center justify-center gap-2"
+            className="glass-button"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >

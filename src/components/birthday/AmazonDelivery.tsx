@@ -7,14 +7,13 @@ interface Props {
 
 const AmazonDelivery = ({ onNext }: Props) => {
   return (
-    <div className="screen-container bg-background">
+    <div className="screen-container">
       <motion.div
         className="wizard-card"
         initial={{ y: 50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
       >
-        {/* Amazon-style header */}
-        <div className="bg-foreground text-background rounded-t-xl -mt-6 -mx-6 sm:-mx-8 px-4 py-3 mb-6 sm:rounded-t-3xl">
+        <div className="glass-panel rounded-t-xl -mt-2 mb-6 px-4 py-3 text-center">
           <p className="font-bold text-lg">📦 Order Confirmation</p>
         </div>
 
@@ -31,7 +30,7 @@ const AmazonDelivery = ({ onNext }: Props) => {
             </div>
           </div>
 
-          <div className="bg-muted rounded-xl p-4 space-y-3">
+          <div className="glass-panel space-y-3">
             <div className="flex items-center gap-2">
               <MapPin className="w-4 h-4 text-muted-foreground" />
               <span className="text-sm">
@@ -46,7 +45,7 @@ const AmazonDelivery = ({ onNext }: Props) => {
             </div>
           </div>
 
-          <div className="border border-border rounded-xl p-4">
+          <div className="glass-panel">
             <p className="text-xs text-muted-foreground mb-1">Order #</p>
             <p className="font-mono text-sm font-bold">BDAY-JAY-2025-GOLU</p>
           </div>
@@ -62,7 +61,7 @@ const AmazonDelivery = ({ onNext }: Props) => {
 
         <motion.button
           onClick={onNext}
-          className="w-full py-3 rounded-xl bg-primary text-primary-foreground font-bold text-lg flex items-center justify-center gap-2 mt-6"
+          className="glass-button mt-6"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >

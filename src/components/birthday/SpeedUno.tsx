@@ -19,10 +19,10 @@ const colorClasses: Record<string, string> = {
 };
 
 const colorBorders: Record<string, string> = {
-  red: "border-destructive",
-  blue: "border-secondary",
-  green: "border-fun",
-  yellow: "border-primary",
+  red: "border-destructive/50",
+  blue: "border-secondary/50",
+  green: "border-fun/50",
+  yellow: "border-primary/50",
 };
 
 function randomCard(): UnoCard {
@@ -34,7 +34,6 @@ function randomCard(): UnoCard {
 
 function generateHand(target: UnoCard): UnoCard[] {
   const hand: UnoCard[] = [];
-  // One correct card
   const correctType = Math.random() > 0.5 ? "color" : "number";
   if (correctType === "color") {
     let num = target.number;
@@ -45,14 +44,12 @@ function generateHand(target: UnoCard): UnoCard[] {
     while (col === target.color) col = COLORS[Math.floor(Math.random() * COLORS.length)];
     hand.push({ color: col, number: target.number });
   }
-  // Three wrong cards
   while (hand.length < 4) {
     const card = randomCard();
     if (card.color !== target.color && card.number !== target.number) {
       hand.push(card);
     }
   }
-  // Shuffle
   return hand.sort(() => Math.random() - 0.5);
 }
 
@@ -110,7 +107,7 @@ const SpeedUno = ({ onNext }: Props) => {
   };
 
   return (
-    <div className="screen-container bg-joy-light">
+    <div className="screen-container">
       <motion.div
         className="wizard-card text-center"
         initial={{ rotateX: 90, opacity: 0 }}
@@ -126,29 +123,26 @@ const SpeedUno = ({ onNext }: Props) => {
             <Timer className="w-5 h-5 text-destructive" />
             <span className={timeLeft <= 10 ? "text-destructive" : ""}>{timeLeft}s</span>
           </div>
-          <div className="font-bold text-secondary">Score: {score}</div>
+          <div className="glass-badge">Score: {score}</div>
         </div>
 
-        {/* Round timer bar */}
-        <div className="w-full h-2 bg-muted rounded-full mb-6 overflow-hidden">
+        <div className="w-full h-2 rounded-full mb-6 overflow-hidden glass-panel p-0">
           <motion.div
             className="h-full bg-secondary rounded-full"
             style={{ width: `${(roundTimer / 2) * 100}%` }}
           />
         </div>
 
-        {/* Target card */}
         <p className="text-sm font-semibold text-muted-foreground mb-2">Match this card:</p>
         <motion.div
           key={`${target.color}-${target.number}`}
           initial={{ scale: 0.5, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          className={`w-24 h-36 rounded-xl ${colorClasses[target.color]} flex items-center justify-center mx-auto mb-6 text-4xl font-bold shadow-lg border-4 ${colorBorders[target.color]}`}
+          className={`w-24 h-36 rounded-xl ${colorClasses[target.color]} flex items-center justify-center mx-auto mb-6 text-4xl font-bold shadow-lg border-2 ${colorBorders[target.color]}`}
         >
           {target.number}
         </motion.div>
 
-        {/* Player hand */}
         <p className="text-sm text-muted-foreground mb-3">
           {!started ? "Tap a matching card to start!" : "Quick! Match color OR number!"}
         </p>
