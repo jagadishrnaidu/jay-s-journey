@@ -3,7 +3,6 @@ export interface BirthdayData {
   quizAnswers: string[];
   hangarooScore: number;
   goals: string[];
-  thailandStory: string;
   unoScore: number;
   uploadedPhoto: string | null;
   imageComments: string[];
@@ -17,7 +16,6 @@ export const initialData: BirthdayData = {
   quizAnswers: ["", "", "", "", ""],
   hangarooScore: 0,
   goals: ["", "", "", "", ""],
-  thailandStory: "",
   unoScore: 0,
   uploadedPhoto: null,
   imageComments: Array(10).fill(""),
@@ -27,30 +25,26 @@ export const initialData: BirthdayData = {
 };
 
 export const quizQuestions = [
-  "What's the secret code word only we both understand? 🤫",
-  "Which Bollywood movie reminds you most of our childhood fights? 🎬",
-  "What's the most ridiculous dare I ever gave you? 😂",
-  "If we had a YouTube channel together, what would it be called? 📺",
-  "What's the one thing about India you miss the most while in UK? 🇮🇳",
+  "What's the one thing you bought recently that you're hiding from the rest of the family? 🤫",
+  "What's the most 'illegal' thing you did in your life that our parents still don't know about? 😈",
+  "If we were in a zombie apocalypse, which one of our relatives would you sacrifice first to save yourself? 🧟",
+  "What's a goal you want to achieve before your next birthday? 🎯",
+  "If you had to move to a different country tomorrow, which one would it be and what would your new 'fake identity' be? 🕵️",
 ];
 
 export const goalQuestions = [
-  "Where do you see yourself in 5 years?",
-  "What's the one skill you want to master this year?",
-  "What's your biggest dream that you haven't told anyone?",
-  "What would you do if you had unlimited money for one day?",
-  "What's one thing you want to change about your daily routine?",
+  "If you could mass-text every ex something anonymously, what would you send? 💀",
+  "What's the dumbest thing you've Googled in the last month? Be honest! 🤡",
+  "If you were a reality TV show contestant, which show would you absolutely dominate and why? 📺",
+  "What's one thing you pretend to be good at but secretly suck at? 😂",
+  "If you had to survive on only one food for a year, what would it be and would you still love it? 🍔",
 ];
 
 export const hangarooWords = [
-  "BIRTHDAY",
-  "BROTHER",
-  "CELEBRATION",
-  "SURPRISE",
-  "GOLU",
-  "TRIZON",
-  "INDIA",
-  "FAMILY",
+  "MANGO STICKY RICE",
+  "RATAN KI KACHODI",
+  "ALOO TIKIYA",
+  "KADHI",
 ];
 
 export async function submitToGoogleSheets(data: BirthdayData): Promise<void> {
@@ -61,7 +55,6 @@ export async function submitToGoogleSheets(data: BirthdayData): Promise<void> {
     quizAnswers: data.quizAnswers,
     hangarooScore: data.hangarooScore,
     goals: data.goals,
-    thailandStory: data.thailandStory,
     unoScore: data.unoScore,
     imageComments: data.imageComments,
     selectedPolaroids: data.selectedPolaroids,

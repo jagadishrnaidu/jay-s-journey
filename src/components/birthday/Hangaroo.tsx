@@ -25,15 +25,14 @@ const Hangaroo = ({ onNext }: Props) => {
   const [guessedLetters, setGuessedLetters] = useState<Set<string>>(new Set());
   const [wrongCount, setWrongCount] = useState(0);
   const [score, setScore] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(90);
+  const [timeLeft, setTimeLeft] = useState(120);
   const [started, setStarted] = useState(false);
   const [roundResult, setRoundResult] = useState<"won" | "lost" | null>(null);
 
   const currentWord = hangarooWords[wordIndex % hangarooWords.length];
+  const uniqueLetters = currentWord.split("").filter((c) => c !== " ");
 
-  const isWordComplete = currentWord
-    .split("")
-    .every((letter) => guessedLetters.has(letter));
+  const isWordComplete = uniqueLetters.every((letter) => guessedLetters.has(letter));
 
   useEffect(() => {
     if (!started || timeLeft <= 0) return;
@@ -46,12 +45,12 @@ const Hangaroo = ({ onNext }: Props) => {
   }, [timeLeft, started, score, onNext]);
 
   useEffect(() => {
-    if (isWordComplete && started) {
+    if (isWordComplete && started && !roundResult) {
       setRoundResult("won");
       setScore((s) => s + 1);
       setTimeout(nextWord, 1200);
     }
-  }, [isWordComplete, started]);
+  }, [isWordComplete, started, roundResult]);
 
   useEffect(() => {
     if (wrongCount >= MAX_WRONG && started) {
@@ -91,7 +90,7 @@ const Hangaroo = ({ onNext }: Props) => {
       >
         <h2 className="text-2xl font-bold mb-2">🦘 Hangaroo!</h2>
         <p className="text-muted-foreground text-sm mb-4">
-          {!started ? "Guess the word! Tap a letter to start." : "Guess the hidden word!"}
+          {!started ? "Guess the food! Tap a letter to start. 🍽️" : "Guess the hidden dish!"}
         </p>
 
         {/* Stats bar */}
@@ -100,7 +99,7 @@ const Hangaroo = ({ onNext }: Props) => {
             <Timer className="w-4 h-4 text-destructive" />
             <span className={timeLeft <= 10 ? "text-destructive" : ""}>{timeLeft}s</span>
           </div>
-          <div className="glass-badge">Score: {score}</div>
+          <div className="glass-badge">Score: {score}/{hangarooWords.length}</div>
           <div className="flex gap-0.5">
             {Array(MAX_WRONG).fill(0).map((_, i) => (
               <Heart
@@ -123,35 +122,40 @@ const Hangaroo = ({ onNext }: Props) => {
           {KANGAROO_STAGES[Math.min(wrongCount, 6)]}
         </motion.div>
 
-        {/* Word blanks */}
-        <div className="flex justify-center gap-2 my-6 flex-wrap">
-          {currentWord.split("").map((letter, i) => (
-            <motion.div
-              key={i}
-              className="w-10 h-12 rounded-lg flex items-center justify-center text-xl font-bold glass-panel"
-              initial={{ y: 10, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: i * 0.05 }}
-            >
-              <AnimatePresence mode="wait">
-                {guessedLetters.has(letter) || roundResult === "lost" ? (
-                  <motion.span
-                    key="letter"
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    className={roundResult === "lost" && !guessedLetters.has(letter)
-                      ? "text-destructive"
-                      : "text-foreground"
-                    }
-                  >
-                    {letter}
-                  </motion.span>
-                ) : (
-                  <span className="text-muted-foreground/30">_</span>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          ))}
+        {/* Word blanks - handles spaces */}
+        <div className="flex justify-center gap-1.5 my-6 flex-wrap">
+          {currentWord.split("").map((letter, i) => {
+            if (letter === " ") {
+              return <div key={i} className="w-4" />;
+            }
+            return (
+              <motion.div
+                key={i}
+                className="w-9 h-11 sm:w-10 sm:h-12 rounded-lg flex items-center justify-center text-lg sm:text-xl font-bold glass-panel"
+                initial={{ y: 10, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: i * 0.03 }}
+              >
+                <AnimatePresence mode="wait">
+                  {guessedLetters.has(letter) || roundResult === "lost" ? (
+                    <motion.span
+                      key="letter"
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      className={roundResult === "lost" && !guessedLetters.has(letter)
+                        ? "text-destructive"
+                        : "text-foreground"
+                      }
+                    >
+                      {letter}
+                    </motion.span>
+                  ) : (
+                    <span className="text-muted-foreground/30">_</span>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* Round result */}
@@ -165,7 +169,7 @@ const Hangaroo = ({ onNext }: Props) => {
                 roundResult === "won" ? "text-fun" : "text-destructive"
               }`}
             >
-              {roundResult === "won" ? "🎉 Got it!" : `😅 It was: ${currentWord}`}
+              {roundResult === "won" ? "🎉 Yummy! Got it!" : `😅 It was: ${currentWord}`}
             </motion.p>
           )}
         </AnimatePresence>
