@@ -59,7 +59,7 @@ const WelcomeScreen = ({ onNext }: Props) => {
         >
           <span>🇮🇳</span>
           <Plane className="w-4 h-4 text-secondary" />
-          <span>🇬🇧</span>
+          <span>🇮🇪</span>
         </motion.div>
 
         <motion.p
@@ -70,7 +70,7 @@ const WelcomeScreen = ({ onNext }: Props) => {
         >
           I have put something special for you.
           <br />
-          <span className="text-love font-semibold">From India to UK with love.</span>
+          <span className="text-love font-semibold">From India to Ireland with love.</span>
         </motion.p>
 
         <motion.div

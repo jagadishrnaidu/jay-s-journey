@@ -6,13 +6,12 @@ import NostalgiaQuiz from "@/components/birthday/NostalgiaQuiz";
 import Hangaroo from "@/components/birthday/Hangaroo";
 import ScoreReveal from "@/components/birthday/ScoreReveal";
 import SelfReflection from "@/components/birthday/SelfReflection";
-import ThailandStory from "@/components/birthday/ThailandStory";
 import SpeedUno from "@/components/birthday/SpeedUno";
 import PhotoUpload from "@/components/birthday/PhotoUpload";
+import JigsawPuzzle from "@/components/birthday/JigsawPuzzle";
 import ImageCommentary from "@/components/birthday/ImageCommentary";
 import PolaroidSelection from "@/components/birthday/PolaroidSelection";
 import AmazonDelivery from "@/components/birthday/AmazonDelivery";
-import JigsawPuzzle from "@/components/birthday/JigsawPuzzle";
 import F1Racer from "@/components/birthday/F1Racer";
 import BirthdayWish from "@/components/birthday/BirthdayWish";
 import SalaryPromise from "@/components/birthday/SalaryPromise";
@@ -58,14 +57,6 @@ const Index = () => {
       />
     ),
     5: (
-      <ThailandStory
-        onNext={(story) => {
-          setData((d) => ({ ...d, thailandStory: story }));
-          next();
-        }}
-      />
-    ),
-    6: (
       <SpeedUno
         onNext={(score) => {
           setData((d) => ({ ...d, unoScore: score }));
@@ -73,10 +64,19 @@ const Index = () => {
         }}
       />
     ),
-    7: (
+    6: (
       <PhotoUpload
         onNext={(photo) => {
           setData((d) => ({ ...d, uploadedPhoto: photo }));
+          next();
+        }}
+      />
+    ),
+    7: (
+      <JigsawPuzzle
+        imageSrc={data.uploadedPhoto}
+        onNext={() => {
+          setData((d) => ({ ...d, jigsawCompleted: true }));
           next();
         }}
       />
@@ -100,14 +100,6 @@ const Index = () => {
     ),
     10: <AmazonDelivery onNext={next} />,
     11: (
-      <JigsawPuzzle
-        onNext={() => {
-          setData((d) => ({ ...d, jigsawCompleted: true }));
-          next();
-        }}
-      />
-    ),
-    12: (
       <F1Racer
         onNext={(score) => {
           setData((d) => ({ ...d, f1Score: score }));
@@ -115,12 +107,12 @@ const Index = () => {
         }}
       />
     ),
-    13: <BirthdayWish onNext={next} />,
-    14: <SalaryPromise />,
+    12: <BirthdayWish onNext={next} />,
+    13: <SalaryPromise />,
   };
 
   // Submit data on final step
-  if (step === 14) {
+  if (step === 13) {
     submitToGoogleSheets(data);
   }
 

@@ -3,12 +3,13 @@ import { motion } from "framer-motion";
 import { Puzzle, RefreshCw } from "lucide-react";
 
 interface Props {
+  imageSrc?: string | null;
   onNext: () => void;
 }
 
 const GRID_SIZE = 3;
 const TOTAL = GRID_SIZE * GRID_SIZE;
-const PLACEHOLDER_IMAGE = "https://picsum.photos/seed/jigsaw-birthday/450/450";
+const FALLBACK_IMAGE = "https://picsum.photos/seed/jigsaw-birthday/450/450";
 
 function shuffleArray(arr: number[]): number[] {
   const shuffled = [...arr];
@@ -18,20 +19,21 @@ function shuffleArray(arr: number[]): number[] {
       const j = Math.floor(Math.random() * (i + 1));
       [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
-    // Check it's not already solved
     const isSolved = shuffled.every((v, i) => v === i);
     if (!isSolved) isSolvable = true;
   }
   return shuffled;
 }
 
-const JigsawPuzzle = ({ onNext }: Props) => {
+const JigsawPuzzle = ({ imageSrc, onNext }: Props) => {
   const [pieces, setPieces] = useState<number[]>(() =>
     shuffleArray(Array.from({ length: TOTAL }, (_, i) => i))
   );
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [solved, setSolved] = useState(false);
   const [moves, setMoves] = useState(0);
+
+  const image = imageSrc || FALLBACK_IMAGE;
 
   const isSolved = useCallback(
     (p: number[]) => p.every((v, i) => v === i),
@@ -81,7 +83,7 @@ const JigsawPuzzle = ({ onNext }: Props) => {
         <p className="text-muted-foreground text-sm mb-4">
           {solved
             ? "🎉 You solved it!"
-            : "Tap two pieces to swap them. Arrange the photo!"}
+            : "Tap two pieces to swap them. Solve the photo!"}
         </p>
 
         <div className="flex justify-between items-center mb-3 px-2">
@@ -119,7 +121,7 @@ const JigsawPuzzle = ({ onNext }: Props) => {
                 } ${solved ? "pointer-events-none" : ""}`}
                 style={{
                   aspectRatio: "1",
-                  backgroundImage: `url(${PLACEHOLDER_IMAGE})`,
+                  backgroundImage: `url(${image})`,
                   backgroundSize: `${GRID_SIZE * 100}%`,
                   backgroundPosition: `${(col / (GRID_SIZE - 1)) * 100}% ${(row / (GRID_SIZE - 1)) * 100}%`,
                 }}
